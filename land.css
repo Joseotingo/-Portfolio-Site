@@ -335,7 +335,7 @@
         @media(max-width:775px){
             header{
                 flex-direction:column;
-                gap:10px;
+                gap:20px;
             }
 
             .hero h2{
