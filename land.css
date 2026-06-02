@@ -332,10 +332,10 @@
             margin-top:40px;
         }
 
-        @media(max-width:769px){
+        @media(max-width:779px){
             header{
                 flex-direction:column;
-                gap:10px;
+                gap:29px;
             }
 
             .hero h2{
