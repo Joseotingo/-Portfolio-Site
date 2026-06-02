@@ -332,14 +332,14 @@
             margin-top:40px;
         }
 
-        @media(max-width:775px){
+        @media(max-width:769px){
             header{
                 flex-direction:column;
                 gap:10px;
             }
 
             .hero h2{
-                font-size:30px;
+                font-size:27px;
             }
 
             .hero p{
