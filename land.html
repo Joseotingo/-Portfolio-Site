@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+    <link rel="stylesheet" href="land.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <h1>Jose Otingo</h1>
+
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#blogs">Blog</a></li>
+                <li><a href="#" onclick="toggleResumeModal(event)">Resume</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="admin.html">Admin Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+        <div class="image">
+            <img src="profilepic.jpg"  style="width: 200px; height: 200px;
+              border-radius: 10%;
+              object-fit: cover;
+              padding-left: 10%;
+              flex-shrink: 0;">
+        </div>
+        <div>
+            <h2>Opilo Portfolio</h2>
+            <p>
+                Welcome to my professional portfolio website.
+                I am passionate about data analysis, health informatics,
+                biostatistics, programming, and research technology.
+            </p>
+
+            <div class="buttons">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+
+                <a href="resume.pdf" class="btn btn-secondary" download>
+                    Download CV
+                </a>
+
+                <a href="#contact" class="btn btn-primary">
+                    Contact Me
+                </a>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="sections" id="about">
+
+        <div class="card">
+            <h3>About Me</h3>
+            <p>
+                I am a Biometry and Informatics student interested in
+                data science, software development for analysist and data interpretation any analitics seteup
+                , medical informatics to help research of new medicine diseases and prevation measures,
+                and research systems.Olso hardware systems of the computers.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Skills</h3>
+            <p>
+                Python Programming<br>
+                Firebase<br>
+                HTML & CSS<br>
+                SQL Databases<br>
+                SPSS & Data Analysis<br>
+                Computer hardwares.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Career Goals</h3>
+            <p>
+                My goal is to become a professional informatics specialist
+                capable of building intelligent health and research systems.
+                also a profesional biometrician cables of us building a
+                 profesional biometric tools used in patient authentication and
+                 analysisnof the behaviour activities
+            </p>
+        </div>
+
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="sections" id="projects">
+        <h2>Projects</h2>
+        <div id="projectCards" class="card-grid">
+            <div class="card">
+                <h3>Hospital Management System</h3>
+                <p>A patient management system developed using Python and SQL.</p>
+            </div>
+            <div class="card">
+                <h3>BMI Calculator</h3>
+                <p>A BMI analysis application for patient health assessment.</p>
+            </div>
+            <div class="card">
+                <h3>Research Data Analysis</h3>
+                <p>SPSS and Python-based statistical analysis projects.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG SECTION -->
+    <section class="sections" id="blogs">
+        <h2>Blog Posts</h2>
+        <div id="blogCards" class="card-grid">
+            <div class="card">
+                <h3>No blog posts yet</h3>
+                <p>Sign in to the admin page and add your first blog post.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESUME MODAL -->
+    <div id="resumeModal" class="resume-modal">
+        <div class="resume-modal-content">
+            <span class="resume-close" onclick="toggleResumeModal()">&times;</span>
+            <h2>My Resume</h2>
+            <div class="resume-viewer">
+                <embed src="resume.pdf" type="application/pdf" class="pdf-embed">
+            </div>
+            <p class="resume-note">If the PDF doesn't display above, you can <a href="resume.pdf" download>download it here</a></p>
+        </div>
+    </div>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="sections" id="testimonials">
+
+        <div class="card">
+            <h3>Lecturer Testimonial</h3>
+            <p>
+                “Jose demonstrates excellent analytical and programming skills.”<br>
+                "he was able to complete an analytical program that was later used<br>
+                 in the analysis of the other student performance."
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Research Supervisor</h3>
+            <p>
+                “Highly committed to informatics and healthcare technology.”<br>
+                "By his authenticity in the the informatics field am here as <br>
+                a witnes of good job and inclusion of this work of art done by jose."
+            </p>
+        </div>
+
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="sections" id="contact">
+
+        <div class="card">
+            <h3>Contact Information</h3>
+            <p>Email: joseotingo2884@email.com</p>
+            <p>Phone: +254 748824487</p>
+            <p>Location: Kenya</p>
+        </div>
+
+        <div class="card">
+            <h3>Social Links</h3>
+            <div class="social-links">
+                <a href="https://github.com" target="_blank" class="social-link">GitHub</a><br>
+                <a href="https://linkedin.com" target="_blank" class="social-link">LinkedIn</a><br>
+                <a href="https://facebook.com" target="_blank" class="social-link">Facebook</a>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Jose Otingo | Biometry & Informatics Portfolio</p>
+    </footer>
+
+    <script>
+        function toggleResumeModal(event) {
+            if(event) {
+                event.preventDefault();
+            }
+            var modal = document.getElementById('resumeModal');
+            if(modal.style.display === 'block') {
+                modal.style.display = 'none';
+            } else {
+                modal.style.display = 'block';
+            }
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            var modal = document.getElementById('resumeModal');
+            if(event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js';
+        import { getFirestore, collection, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD8AEZZZfSzRgCpPHi06SIZjbVZQgruV0A",
+            authDomain: "personal-portfolio-c6fce.firebaseapp.com",
+            projectId: "personal-portfolio-c6fce",
+            storageBucket: "personal-portfolio-c6fce.firebasestorage.app",
+            messagingSenderId: "750990237457",
+            appId: "1:750990237457:web:4a5689186b833332af36b0"
+
+        };
+
+        const projectCards = document.getElementById('projectCards');
+        const blogCards = document.getElementById('blogCards');
+
+        if (!firebaseConfig.apiKey || firebaseConfig.apiKey.includes('YOUR_')) {
+            console.warn('Firebase config is not set. Dynamic project/blog loading is disabled.');
+        } else {
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
+            loadPublicContent(db);
+        }
+
+        async function loadPublicContent(db) {
+            await loadProjects(db);
+            await loadBlogs(db);
+        }
+
+        async function loadProjects(db) {
+            try {
+                const projectsQuery = query(collection(db, 'projects'), orderBy('createdAt', 'desc'));
+                const projectsSnapshot = await getDocs(projectsQuery);
+                const projects = projectsSnapshot.docs.map(doc => doc.data());
+                if (projects.length === 0) return;
+                projectCards.innerHTML = projects.map(project => `
+                    <div class="card">
+                        <h3>${escapeHtml(project.title)}</h3>
+                        <p>${escapeHtml(project.description)}</p>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Unable to load projects:', error);
+            }
+        }
+
+        async function loadBlogs(db) {
+            try {
+                const blogsQuery = query(collection(db, 'blogs'), orderBy('createdAt', 'desc'));
+                const blogsSnapshot = await getDocs(blogsQuery);
+                const blogs = blogsSnapshot.docs.map(doc => doc.data());
+                if (blogs.length === 0) return;
+                blogCards.innerHTML = blogs.map(blog => `
+                    <div class="card">
+                        <h3>${escapeHtml(blog.title)}</h3>
+                        <p>${escapeHtml(blog.description)}</p>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Unable to load blogs:', error);
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
+```
+
+
+
+

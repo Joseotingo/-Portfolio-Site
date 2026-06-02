@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Portfolio</title>
+    <link rel="stylesheet" href="land.css">
+</head>
+<body>
+    <header>
+        <h1>Portfolio Admin</h1>
+        <nav>
+            <ul>
+                <li><a href="land.html">Home</a></li>
+                <li><a href="#" onclick="document.getElementById('adminEmail').focus()">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="admin-container">
+        <section class="admin-card" id="loginSection">
+            <h2>Administrator Login</h2>
+            <p>Sign in with your Firebase admin account to manage projects and blog posts.</p>
+            <form class="admin-form" onsubmit="handleLogin(event)">
+                <label for="adminEmail">Email</label>
+                <input id="adminEmail" type="email" class="form-input" placeholder="Admin email" required>
+                <label for="adminPassword">Password</label>
+                <input id="adminPassword" type="password" class="form-input" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+                <p class="error-message" id="loginError"></p>
+            </form>
+            <p class="admin-note">Tip: Create an admin user in your Firebase console, then use that email and password here.</p>
+        </section>
+
+        <section class="admin-card hidden" id="dashboardSection">
+            <div class="admin-top-row">
+                <div>
+                    <h2>Admin Dashboard</h2>
+                    <p id="adminEmailLabel"></p>
+                </div>
+                <button class="btn btn-secondary" onclick="logoutAdmin()">Log Out</button>
+            </div>
+
+            <div class="admin-form-group">
+                <h3>Add Project</h3>
+                <form onsubmit="addProject(event)">
+                    <label>Project Title</label>
+                    <input id="projectTitle" type="text" class="form-input" placeholder="Project title" required>
+                    <label>Project Description</label>
+                    <textarea id="projectDescription" class="form-textarea" placeholder="Project details" required></textarea>
+                    <button type="submit" class="btn btn-primary">Add Project</button>
+                </form>
+            </div>
+
+            <div class="admin-form-group">
+                <h3>Add Blog Post</h3>
+                <form onsubmit="addBlog(event)">
+                    <label>Blog Title</label>
+                    <input id="blogTitle" type="text" class="form-input" placeholder="Blog title" required>
+                    <label>Blog Summary</label>
+                    <textarea id="blogDescription" class="form-textarea" placeholder="Blog summary" required></textarea>
+                    <button type="submit" class="btn btn-primary">Add Blog</button>
+                </form>
+            </div>
+
+            <div class="admin-preview">
+                <div class="preview-card">
+                    <h3>Project Preview</h3>
+                    <div id="projectList"></div>
+                </div>
+                <div class="preview-card">
+                    <h3>Blog Preview</h3>
+                    <div id="blogList"></div>
+                </div>
+            </div>
+            <p class="admin-note">Changes are saved to Firebase and will display on your live portfolio after refresh.</p>
+        </section>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js';
+        import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: 'YOUR_API_KEY',
+            authDomain: 'YOUR_AUTH_DOMAIN',
+            projectId: 'YOUR_PROJECT_ID',
+            storageBucket: 'YOUR_STORAGE_BUCKET',
+            messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+            appId: 'YOUR_APP_ID'
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const loginSection = document.getElementById('loginSection');
+        const dashboardSection = document.getElementById('dashboardSection');
+        const loginError = document.getElementById('loginError');
+        const adminEmailLabel = document.getElementById('adminEmailLabel');
+        const projectListElement = document.getElementById('projectList');
+        const blogListElement = document.getElementById('blogList');
+
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                loginError.textContent = '';
+                showDashboard(user);
+            } else {
+                showLogin();
+            }
+        });
+
+        async function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('adminEmail').value.trim();
+            const password = document.getElementById('adminPassword').value.trim();
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (error) {
+                loginError.textContent = 'Unable to sign in. Check email and password.';
+                console.error(error);
+            }
+        }
+
+        function showDashboard(user) {
+            loginSection.classList.add('hidden');
+            dashboardSection.classList.remove('hidden');
+            adminEmailLabel.textContent = `Signed in as ${user.email}`;
+            refreshPreview();
+        }
+
+        function showLogin() {
+            loginSection.classList.remove('hidden');
+            dashboardSection.classList.add('hidden');
+            loginError.textContent = '';
+        }
+
+        async function logoutAdmin() {
+            await signOut(auth);
+            showLogin();
+        }
+
+        async function addProject(event) {
+            event.preventDefault();
+            const title = document.getElementById('projectTitle').value.trim();
+            const description = document.getElementById('projectDescription').value.trim();
+            if (!title || !description) return;
+            await addDoc(collection(db, 'projects'), {
+                title,
+                description,
+                createdAt: serverTimestamp()
+            });
+            document.getElementById('projectTitle').value = '';
+            document.getElementById('projectDescription').value = '';
+            await refreshPreview();
+        }
+
+        async function addBlog(event) {
+            event.preventDefault();
+            const title = document.getElementById('blogTitle').value.trim();
+            const description = document.getElementById('blogDescription').value.trim();
+            if (!title || !description) return;
+            await addDoc(collection(db, 'blogs'), {
+                title,
+                description,
+                createdAt: serverTimestamp()
+            });
+            document.getElementById('blogTitle').value = '';
+            document.getElementById('blogDescription').value = '';
+            await refreshPreview();
+        }
+
+        async function refreshPreview() {
+            const projectsQuery = query(collection(db, 'projects'), orderBy('createdAt', 'desc'));
+            const projectSnapshot = await getDocs(projectsQuery);
+            const projects = projectSnapshot.docs.map(doc => doc.data());
+            projectListElement.innerHTML = projects.length === 0
+                ? '<p>No projects added yet.</p>'
+                : projects.map((project, index) => `
+                    <div class="preview-item">
+                        <strong>${index + 1}. ${project.title}</strong>
+                        <p>${project.description}</p>
+                    </div>
+                `).join('');
+
+            const blogsQuery = query(collection(db, 'blogs'), orderBy('createdAt', 'desc'));
+            const blogSnapshot = await getDocs(blogsQuery);
+            const blogs = blogSnapshot.docs.map(doc => doc.data());
+            blogListElement.innerHTML = blogs.length === 0
+                ? '<p>No blogs added yet.</p>'
+                : blogs.map((blog, index) => `
+                    <div class="preview-item">
+                        <strong>${index + 1}. ${blog.title}</strong>
+                        <p>${blog.description}</p>
+                    </div>
+                `).join('');
+        }
+    </script>
+</body>
+</html>
