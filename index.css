@@ -192,6 +192,14 @@
             font-size: 2.2rem;
             margin-bottom: 12px;
         }
+        .cert-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            object-fit: cover;
+            display: block;
+        }
         .cert-card h3 {
             font-size: 1.15rem;
             margin-bottom: 6px;
@@ -313,7 +321,18 @@
         }
 
         /* ===== RESPONSIVE ===== */
+        /* Tablet & Small Screens */
         @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            .navbar {
+                padding: 12px 0;
+            }
+            .brand-logo {
+                width: 36px;
+                height: 36px;
+            }
             .nav-links {
                 display: none;
                 flex-direction: column;
@@ -324,12 +343,24 @@
                 width: 100%;
                 padding: 16px 24px;
                 box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+                gap: 16px;
+            }
+            .nav-links li {
+                margin: 8px 0;
             }
             .nav-links.open {
                 display: flex;
             }
             .hamburger {
                 display: block;
+            }
+            section {
+                padding: 48px 0;
+            }
+            .hero {
+                padding: 60px 0 40px;
+                margin-top: 16px;
+                border-radius: 16px;
             }
             .hero-inner {
                 flex-direction: column;
@@ -339,23 +370,194 @@
                 width: 100%;
                 max-width: 100%;
                 flex: none;
-                border-radius: 20px;
-                padding-top: 0%;
+                border-radius: 16px;
+                height: 300px;
             }
             .hero-copy {
                 text-align: center;
             }
             .hero h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             .hero p {
-                margin: 0 auto 28px;
+                margin: 0 auto 24px;
                 max-width: 100%;
+                font-size: 1rem;
+            }
+            .hero .btn {
+                padding: 10px 28px;
             }
             .section-title {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
+                margin-bottom: 32px;
             }
             .cert-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .cert-card {
+                padding: 20px;
+            }
+            .about-content {
+                font-size: 1rem;
+            }
+            .skills-wrapper {
+                gap: 10px;
+            }
+            .skill-tag {
+                font-size: 0.85rem;
+                padding: 6px 16px;
+            }
+            .contact-info {
+                flex-direction: column;
+                gap: 24px;
+                padding: 16px;
+            }
+            .social-links {
+                min-width: auto;
+                flex-direction: row;
+                flex-wrap: wrap;
+                margin-top: 0;
+            }
+            .social-links a {
+                flex: 1;
+                min-width: 140px;
+                justify-content: center;
+            }
+            .footer-content {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+
+        /* Small Devices */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 14px;
+            }
+            .navbar {
+                padding: 10px 0;
+            }
+            .brand-logo {
+                width: 32px;
+                height: 32px;
+            }
+            .logo-text {
+                display: none;
+            }
+            section {
+                padding: 36px 0;
+            }
+            .hero {
+                padding: 40px 0 30px;
+                margin-top: 12px;
+                border-radius: 12px;
+            }
+            .hero-image {
+                height: 240px;
+                border-radius: 12px;
+            }
+            .hero h1 {
+                font-size: 1.4rem;
+                margin-bottom: 12px;
+            }
+            .hero p {
+                font-size: 0.9rem;
+                margin-bottom: 20px;
+                line-height: 1.5;
+            }
+            .hero .btn {
+                font-size: 0.9rem;
+                padding: 10px 24px;
+            }
+            .section-title {
+                font-size: 1.2rem;
+                margin-bottom: 24px;
+            }
+            .section-title::after {
+                width: 50px;
+            }
+            .cert-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .cert-card {
+                padding: 16px;
+                border-radius: 12px;
+            }
+            .cert-card h3 {
+                font-size: 1rem;
+            }
+            .cert-card .issuer {
+                font-size: 0.85rem;
+            }
+            .cert-card .date {
+                font-size: 0.8rem;
+            }
+            .cert-card .credential-link {
+                font-size: 0.8rem;
+                padding: 5px 14px;
+            }
+            .about-content {
+                font-size: 0.95rem;
+            }
+            .skill-tag {
+                font-size: 0.8rem;
+                padding: 5px 14px;
+            }
+            .skills-wrapper {
+                gap: 8px;
+                justify-content: flex-start;
+            }
+            .contact-info {
+                gap: 20px;
+                padding: 12px;
+            }
+            .contact-details p {
+                font-size: 0.95rem;
+                margin-bottom: 10px;
+            }
+            .social-links {
+                flex-direction: column;
+            }
+            .social-links a {
+                width: 100%;
+                font-size: 0.9rem;
+                padding: 10px 16px;
+            }
+            footer {
+                padding: 20px 0;
+            }
+            .footer-content {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Extra Small Devices */
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 12px;
+            }
+            .navbar {
+                padding: 8px 0;
+            }
+            .hamburger {
+                font-size: 1.4rem;
+            }
+            .hero-copy h1 {
+                font-size: 1.2rem;
+            }
+            .hero p {
+                font-size: 0.85rem;
+            }
+            .section-title {
+                font-size: 1.1rem;
+            }
+            .cert-card {
+                padding: 14px;
+            }
+            .skill-tag {
+                font-size: 0.75rem;
+                padding: 4px 12px;
             }
         }
